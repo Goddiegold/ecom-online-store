@@ -9,6 +9,7 @@ django-cors-headers = "*"
 djangorestframework = "*"
 pillow = "*"
 drf-nested-routers = "*"
+braintree = "*"
 
 [dev-packages]
 

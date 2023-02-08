@@ -31,8 +31,14 @@ urlpatterns = [
     #route to order products
     path('order/add/<str:id>/<str:token>/',api_views.add_order_view,name='add_order'),
 
+    #route to make payments and generate payment token
+    path("payment/get-token/<str:id>/<str:token>/", api_views.generate_payment_token, name="generate_payment_token"),
+    path("payment/process/<str:id>/<str:token>/", api_views.process_payment, name="process_payment"),
+
     #route to get api auth token
     path('api-token-auth/',views.obtain_auth_token,name="api_token_auth")
+
+
 ]
 
 urlpatterns += router.urls
