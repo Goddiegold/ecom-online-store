@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import Base from './Base';
+import Card from './Card';
 import { getProducts } from './helper/core_api_calls';
 
 function Home(props) {
@@ -20,17 +22,17 @@ function Home(props) {
     }, [])
 
     return (
-        <>
+        <Base title='Home Page' description='Welcome to Store'>
             <h1>Home</h1>
             <div className='row'>
             {products.map(product => (
-                <div key={product.id}>
-                <h1>{product.name}</h1>
+                <div key={product.id} className="col-4 mb-4">
+              <Card product={product}/>
                 </div>
             ))
             }
             </div>
-        </>
+        </Base>
     );
 }
 
