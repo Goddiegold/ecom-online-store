@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ImageHelper from "./helper/imageHelper";
 import { useNavigate } from "react-router-dom"
 import { addItemToCart,removeItemFromCart } from './helper/cartHelper';
+import {isAuthenticated} from "../auth/helper/index"
 
 function Card({
     product,
@@ -9,15 +10,17 @@ function Card({
     removeFromCart = false 
 }) {
 
-    const isAuthenticated = true;
+    const [redirect,setRedirect] = useState(false)
+    const authenticated = isAuthenticated()
 
     const navigate = useNavigate()
 
     const handleAddToCart = () => {
-        if (isAuthenticated) {
-            addItemToCart(product, ()=>{})
+        if (authenticated) {
+            addItemToCart(product, ()=>setRedirect(true))
             console.log("Added to cart");
         } else {
+            // redirectUser(redirect)
             console.log("Login Please!!!")
         }
     }
@@ -54,6 +57,7 @@ function Card({
             </div>
 
             <div className="card-body">
+            {redirectUser(redirect)}
                 {/* <div className="rounded border border-success p-2">
                     <img src={product.image} alt="" style={{ maxHeight: "100%", maxWidth: "100%" }} className="mb-3 rounded" />
                 </div> */}

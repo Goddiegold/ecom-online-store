@@ -1,7 +1,6 @@
 import React from 'react';
-import {Route,Navigate} from 'react-router-dom'
+import {Navigate} from 'react-router-dom'
 import {isAuthenticated} from './helper'
-import Signin from '../user/Signin';
 
 function PrivateRoute({children}){
     const auth = isAuthenticated()
@@ -12,6 +11,6 @@ return (
         {children}
     </>
 )
-else return <Navigate to='/signin'/>
+else return <Navigate to='/login'/>
 }
 export default PrivateRoute;

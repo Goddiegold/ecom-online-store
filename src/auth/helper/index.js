@@ -18,11 +18,14 @@ export const signup = async (user) =>
 
 
 export const login = async (user) => {
+    console.log(user)
     const formData = new FormData()
 
     for(const name in user){
         formData.append(name, user[name])
     }
+
+    console.log(formData);
 
     return await (await fetch(`${API}user/login/`,{method:"POST", body:formData})).json()
 }
@@ -46,11 +49,11 @@ export const isAuthenticated = () => {
     }
 }
 
-const logout = async  (next) => {
+export const logout = async  (next) => {
     const userId = isAuthenticated() && isAuthenticated().user.id
 
     if(typeof window !== "undefined"){
-        returnItemInLocalStorage(tshirtStoreUserToken)
+        localStorage.removeItem(tshirtStoreUserToken)
         cartEmpty(()=>{})
         // next()
 
