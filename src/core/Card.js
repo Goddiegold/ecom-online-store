@@ -7,7 +7,9 @@ import {isAuthenticated} from "../auth/helper/index"
 function Card({
     product,
     addToCart = true,
-    removeFromCart = false 
+    removeFromCart = false,
+    reload,
+    setReload 
 }) {
 
     const [redirect,setRedirect] = useState(false)
@@ -45,7 +47,10 @@ function Card({
     const showRemoveFromCart = removeFromCart => {
         if (removeFromCart) return (<button
          className="btn btn-block btn-outline-danger mt-2 mb-2"
-         onClick={()=>removeItemFromCart(product.id)}
+         onClick={()=>{
+            removeItemFromCart(product.id)
+            setReload(!reload)
+            }}
          >
             Remove from cart
         </button>)
