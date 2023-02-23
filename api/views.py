@@ -102,7 +102,8 @@ def validate_user_session(id,token):
     """this function validates user session id(current user id), token(user token)"""
     UserModel = get_user_model()
     try:
-        user = UserModel.objects(pk=id)
+        user = UserModel.objects.get(pk=id)
+        print(user.email)
         if user.session_token == token:
             return True
         return False
@@ -130,7 +131,7 @@ def add_order_view(request,id,token):
         except UserModel.DoesNotExist:
             return JsonResponse({'error':'User does not exist'})   
 
-        order = Order(user=user_id, 
+        order = Order(user=user, 
         product_names=products,
         transaction_id=transaction_id,
         total_amount=amount,
@@ -162,7 +163,7 @@ def generate_payment_token(request,id,token):
     if not validate_user_session(id,token):
         return JsonResponse({'error':'Invalid session, Pls login again!'})
 
-    return JsonResponse({'clientToken':gateway.client_token.generate({"customer_id":id}), 'success':True}) 
+    return JsonResponse({'clientToken':gateway.client_token.generate(), 'success':True}) 
 
 
 @csrf_exempt
