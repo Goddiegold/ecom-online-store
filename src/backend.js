@@ -1,2 +1,2 @@
-export const API = process.env.REACT_APP_BACKEND || '/api/'
+export const API = '/api/'
 console.log(API)
