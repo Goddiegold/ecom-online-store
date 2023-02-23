@@ -11,6 +11,7 @@ pillow = "*"
 drf-nested-routers = "*"
 braintree = "*"
 whitenoise = "*"
+gunicorn = "*"
 
 [dev-packages]
 
